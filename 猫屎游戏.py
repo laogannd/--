@@ -52,10 +52,12 @@ def main():
     # 游戏循环
     low = min_val
     high = max_val
+    display_low = min_val
+    display_high = max_val
     rounds = 0
 
     while True:
-        print(f"\n当前范围: {low} ~ {high}  |  🎯 目标: {target}")
+        print(f"\n当前范围: {display_low} ~ {display_high}  |  🎯 目标: {target}")
         guess = input("请输入你猜的数字: ").strip()
 
         # 检查是否为整数
@@ -65,9 +67,9 @@ def main():
             print("⚠ 无效输入！请输入一个整数。")
             continue
 
-        # 检查是否在有效范围内
+        # 检查是否在有效范围内（实际范围）
         if guess < low or guess > high:
-            print(f"⚠ 无效输入！数字必须在 {low} ~ {high} 范围内。")
+            print(f"⚠ 无效输入！数字必须在 {display_low} ~ {display_high} 范围内。")
             continue
 
         rounds += 1
@@ -81,10 +83,12 @@ def main():
             break
         elif guess < target:
             low = guess + 1
-            print(f"📈 太小了！范围缩小为 {low} ~ {high}")
+            display_low = guess
+            print(f"📈 太小了！范围缩小为 {display_low} ~ {display_high}")
         else:
             high = guess - 1
-            print(f"📉 太大了！范围缩小为 {low} ~ {high}")
+            display_high = guess
+            print(f"📉 太大了！范围缩小为 {display_low} ~ {display_high}")
 
     # 再来一局
     print()
